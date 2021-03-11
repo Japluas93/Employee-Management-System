@@ -51,3 +51,5 @@ function viewAllEmployees() {
       choices();
     });
 }
+
+choices();
