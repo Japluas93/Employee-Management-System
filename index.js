@@ -56,4 +56,8 @@ function viewAllEmployees() {
     });
 }
 
+function addEmployee() {
+  console.log("Let's add a new employee");
+}
+
 choices();
