@@ -13,3 +13,19 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
   if (err) throw err;
 });
+
+function questions() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "choice",
+        message: "Choose one of the options",
+        choices: [""],
+      },
+    ])
+    .then((data) => {
+      if (data.choice === "") {
+      }
+    });
+}
