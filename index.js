@@ -40,6 +40,8 @@ function choices() {
         viewAllEmployees();
       } else if (data.choice === "Add employee") {
         addEmployee();
+      } else if (data.choice === "Add role") {
+        addRole();
       }
     });
 }
