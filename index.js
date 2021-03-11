@@ -30,3 +30,15 @@ function choices() {
       }
     });
 }
+// Performs a query that selects all of the employees from the database
+// The data is called (with the .then method) and gets printed to the console
+function viewAllEmployees() {
+  connection
+    .promise()
+    .query("select * from employee")
+    .then((data) => {
+      var emp = data[0];
+      console.table(emp);
+      choices();
+    });
+}
