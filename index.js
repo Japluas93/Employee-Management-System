@@ -1,3 +1,5 @@
+// express is a Node standard library package for asking questions, parsing input, and validating answers
+const inquirer = require("inquirer");
 // Loads my sql module
 const mysql = require("mysql2");
 // Require and configure dotenv
