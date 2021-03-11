@@ -25,7 +25,8 @@ function choices() {
       },
     ])
     .then((data) => {
-      if (data.choice === "") {
+      if (data.choice === "View all employees") {
+        viewAllEmployees();
       }
     });
 }
