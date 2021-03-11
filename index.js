@@ -13,8 +13,8 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
   if (err) throw err;
 });
-
-function questions() {
+// Launching the prompt interface (using inquirer.prompt) with our object that will wait for the user's choice
+function choices() {
   inquirer
     .prompt([
       {
