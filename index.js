@@ -21,7 +21,7 @@ function choices() {
         type: "list",
         name: "choice",
         message: "Choose one of the options",
-        choices: [""],
+        choices: ["View all employees"],
       },
     ])
     .then((data) => {
