@@ -38,6 +38,8 @@ function choices() {
     .then((data) => {
       if (data.choice === "View all employees") {
         viewAllEmployees();
+      } else if (data.choice === "Add employee") {
+        addEmployee();
       }
     });
 }
