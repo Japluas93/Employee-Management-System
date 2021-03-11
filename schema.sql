@@ -9,7 +9,7 @@ USE employee_DB;
 -- "id" is a numeric column that cannot contain null and will automatically increment as new rows are created. --
 -- "name" is a string column which cannot contain null --
 
-CREATE TABLE department(
+CREATE TABLE department (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
@@ -22,12 +22,12 @@ CREATE TABLE department(
 -- "department_id" is a numeric column which cannot contain null --
 -- "department_id" holds reference to the department role belongs to
 
-CREATE TABLE role(
+CREATE TABLE role (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(30) NOT NULL,
     salary decimal,
     department_id INT NOT NULL,
-    FOREIGN KEY (department_id) REFERENCES department (id) ON DELETE CASCADE
+    FOREIGN KEY (department_id) REFERENCES department (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
 );
 
@@ -40,13 +40,13 @@ CREATE TABLE role(
 -- "manager_id" is a numeric column that can be null if the employee has no manager
 -- "manager_id" holds reference to the employee that manages the employee being created --
 
-CREATE TABLE employee(
+CREATE TABLE employee (
     id INT NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INT NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE CASCADE
+    FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE CASCADE,
     manager_id INT,
-    FOREIGN KEY (manager_id) REFERENCES employee (id) ON DELETE CASCADE
+    FOREIGN KEY (manager_id) REFERENCES employee (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
 );
