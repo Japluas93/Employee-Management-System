@@ -44,6 +44,8 @@ function choices() {
         addRole();
       } else if (data.choice === "Add department") {
         addDepartment();
+      } else if (data.choice === "View all departments") {
+        viewAllDepartments();
       }
     });
 }
