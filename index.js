@@ -36,9 +36,7 @@ function choices() {
       },
     ])
     .then((data) => {
-      if (data.choice === "View all employees") {
-        viewAllEmployees();
-      } else if (data.choice === "Add employee") {
+      if (data.choice === "Add employee") {
         addEmployee();
       } else if (data.choice === "Add role") {
         addRole();
@@ -48,6 +46,8 @@ function choices() {
         viewAllDepartments();
       } else if (data.choice === "View all roles") {
         viewAllRoles();
+      } else if (data.choice === "View all employees") {
+        viewAllEmployees();
       } else if (data.choice === "Update employee roles") {
         updateEmployeeRoles();
       } else if (data.choice === "Exit") {
