@@ -42,6 +42,8 @@ function choices() {
         addEmployee();
       } else if (data.choice === "Add role") {
         addRole();
+      } else if (data.choice === "Add department") {
+        addDepartment();
       }
     });
 }
