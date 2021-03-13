@@ -86,4 +86,8 @@ function viewAllRoles() {
   console.log("Let's view all of the roles");
 }
 
+function updateEmployeeRoles() {
+  console.log("Let's update some employee roles");
+}
+
 choices();
