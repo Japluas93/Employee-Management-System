@@ -48,6 +48,8 @@ function choices() {
         viewAllDepartments();
       } else if (data.choice === "View all roles") {
         viewAllRoles();
+      } else if (data.choice === "Update employee roles") {
+        updateEmployeeRoles();
       }
     });
 }
