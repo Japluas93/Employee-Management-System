@@ -50,6 +50,8 @@ function choices() {
         viewAllRoles();
       } else if (data.choice === "Update employee roles") {
         updateEmployeeRoles();
+      } else (data.choice === "Exit") {
+        connection.end();
       }
     });
 }
