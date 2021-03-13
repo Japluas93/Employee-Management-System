@@ -74,4 +74,7 @@ function addDepartment() {
   console.log("Let's add a new department");
 }
 
+function viewAllDepartments() {
+  console.log("Let's view all of the departments");
+}
 choices();
