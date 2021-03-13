@@ -68,4 +68,8 @@ function addRole() {
   console.log("Let's add a new role");
 }
 
+function addDepartment() {
+  console.log("Let's add a new department");
+}
+
 choices();
