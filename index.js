@@ -58,18 +58,145 @@ function choices() {
 
 function addEmployee() {
   console.log("Let's add a new employee");
+  connection
+    .promise()
+    .query("select * from department")
+    .then((data) => {
+      const depts = data[0];
+      const roleArray = [];
+      for (i = 0; i < depts.length; i++) {
+        const dept = depts[i];
+        const choice = { name: dept.name, value: dept.id };
+        roleArray.push(choice);
+      }
+      connection
+        .promise()
+        .query("select * from employee")
+        .then((data) => {
+          const depts = data[0];
+          const managerArray = [];
+          for (i = 0; i < depts.length; i++) {
+            const dept = depts[i];
+            const choice = { name: dept.name, value: dept.id };
+            managerArray.push(choice);
+          }
+          managerArray.push({ name: "none", value: null });
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "first_name",
+                message: "What is your first name?",
+              },
+              {
+                type: "input",
+                name: "last_name",
+                message: "What is your last name?",
+              },
+              {
+                type: "list",
+                name: "role_id",
+                message: "Choose your role.",
+                choices: roleArray,
+              },
+              {
+                type: "list",
+                name: "manager_id",
+                message: "Choose your manager.",
+                choices: managerArray,
+              },
+            ])
+            .then((answers) => {
+              console.log(answers);
+              connection
+                .promise()
+                .query("INSERT INTO employee SET ?", answers)
+                .then((res) => {
+                  console.log("A new employee has been added");
+                  choices();
+                });
+            });
+        });
+    });
 }
 
 function addRole() {
   console.log("Let's add a new role");
+  connection
+    .promise()
+    .query("select * from department")
+    .then((data) => {
+      const depts = data[0];
+      const choiceArray = [];
+      for (i = 0; i < depts.length; i++) {
+        const dept = depts[i];
+        const choice = { name: dept.name, value: dept.id };
+        choiceArray.push(choice);
+      }
+
+      inquirer
+        .prompt([
+          {
+            type: "input",
+            name: "title",
+            message: "What is the title of the role?",
+          },
+          {
+            type: "input",
+            name: "salary",
+            message: "What is the role's salary?",
+          },
+          {
+            type: "list",
+            name: "department_id",
+            message: "Choose a department for this role.",
+            choices: choiceArray,
+          },
+        ])
+        .then((answers) => {
+          console.log(answers);
+          connection
+            .promise()
+            .query("INSERT INTO role SET ?", answers)
+            .then((res) => {
+              console.log("Department has been added");
+              choices();
+            });
+        });
+    });
 }
 
 function addDepartment() {
   console.log("Let's add a new department");
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is the name of the department?",
+      },
+    ])
+    .then((answers) => {
+      connection
+        .promise()
+        .query("INSERT INTO department SET ?", answers)
+        .then((res) => {
+          console.log("Department has been added");
+          choices();
+        });
+    });
 }
 
 function viewAllDepartments() {
-  console.log("Let's view all of the departments");
+  // console.log("Let's view all of the departments");
+  connection
+    .promise()
+    .query("select * from department")
+    .then((data) => {
+      var dep = data[0];
+      console.table(dep);
+      choices();
+    });
 }
 
 function viewAllRoles() {
