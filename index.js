@@ -201,6 +201,14 @@ function viewAllDepartments() {
 
 function viewAllRoles() {
   console.log("Let's view all of the roles");
+  connection
+    .promise()
+    .query("select * from role")
+    .then((data) => {
+      var role = data[0];
+      console.table(role);
+      choices();
+    });
 }
 
 // Performs a query that selects all of the employees from the database
