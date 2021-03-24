@@ -193,8 +193,12 @@ function viewAllDepartments() {
     .promise()
     .query("select * from department")
     .then((data) => {
+      console.log(data);
       var dep = data[0];
-      console.table(dep);
+      var department_names = dep.map((department) => {
+        return dep.name;
+      });
+      console.log(department_names);
       choices();
     });
 }
