@@ -164,7 +164,7 @@ function addRole() {
             .promise()
             .query("INSERT INTO role SET ?", answers)
             .then((res) => {
-              console.log("Department has been added");
+              console.log("A new role has been added");
               choices();
             });
         });
