@@ -76,13 +76,13 @@ function addEmployee() {
         .then((data) => {
           // console.log("this is data ", data);
           const depts = data[0];
-          console.log(depts);
+          // console.log(depts);
           const managerArray = [];
           for (i = 0; i < depts.length; i++) {
             const dept = depts[i];
             const choice = { name: dept.first_name, value: dept.id };
             // const choice = `${dept.first_name} ${dept.last_name}`;
-            console.log("this is a choice ", choice);
+            // console.log("this is a choice ", choice);
             managerArray.push(choice);
           }
           managerArray.push({ name: "none", value: null });
@@ -193,7 +193,7 @@ function addDepartment() {
 }
 
 function viewAllDepartments() {
-  // console.log("Let's view all of the departments");
+  console.log("Let's view all of the departments");
   connection
     .promise()
     .query("select * from department")
@@ -242,7 +242,7 @@ function updateEmployeeRoles() {
     )
     .then((data) => {
       var updateEmp = data[0];
-      console.log(updateEmp);
+      // console.log(updateEmp);
       let updateEmployee = updateEmp.map(
         (employee) => employee.first_name + " " + employee.last_name
       );
