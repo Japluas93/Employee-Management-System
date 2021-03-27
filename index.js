@@ -112,7 +112,7 @@ function addEmployee() {
               },
             ])
             .then((answers) => {
-              console.log(answers);
+              console.table(answers);
               connection
                 .promise()
                 .query("INSERT INTO employee SET ?", answers)
@@ -159,7 +159,7 @@ function addRole() {
           },
         ])
         .then((answers) => {
-          console.log(answers);
+          console.table(answers);
           connection
             .promise()
             .query("INSERT INTO role SET ?", answers)
@@ -263,7 +263,7 @@ function updateEmployeeRoles() {
           },
         ])
         .then(function (response) {
-          console.log(response);
+          console.table(response);
           const employeeObj = updateEmp.find(
             (employee) =>
               employee.first_name + " " + employee.last_name ===
