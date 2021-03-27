@@ -60,24 +60,29 @@ function addEmployee() {
   console.log("Let's add a new employee");
   connection
     .promise()
-    .query("select * from department")
+    .query("select * from role")
     .then((data) => {
       const depts = data[0];
+      // console.log(depts);
       const roleArray = [];
       for (i = 0; i < depts.length; i++) {
         const dept = depts[i];
-        const choice = { name: dept.name, value: dept.id };
+        const choice = { name: dept.title, value: dept.id };
         roleArray.push(choice);
       }
       connection
         .promise()
         .query("select * from employee")
         .then((data) => {
+          // console.log("this is data ", data);
           const depts = data[0];
+          console.log(depts);
           const managerArray = [];
           for (i = 0; i < depts.length; i++) {
             const dept = depts[i];
-            const choice = { name: dept.name, value: dept.id };
+            const choice = { name: dept.first_name, value: dept.id };
+            // const choice = `${dept.first_name} ${dept.last_name}`;
+            console.log("this is a choice ", choice);
             managerArray.push(choice);
           }
           managerArray.push({ name: "none", value: null });
@@ -193,12 +198,12 @@ function viewAllDepartments() {
     .promise()
     .query("select * from department")
     .then((data) => {
-      console.log(data);
       var dep = data[0];
+      console.log(dep);
       var department_names = dep.map((department) => {
-        return dep.name;
+        return department.name;
       });
-      console.log(department_names);
+      console.table(department_names);
       choices();
     });
 }
@@ -230,6 +235,66 @@ function viewAllEmployees() {
 
 function updateEmployeeRoles() {
   console.log("Let's update some employee roles");
+  connection
+    .promise()
+    .query(
+      "select employee.id employeeID, role.id roleID, employee.first_name, employee.last_name, role.title from employee  LEFT JOIN role on role.id = employee.role_id"
+    )
+    .then((data) => {
+      var updateEmp = data[0];
+      console.log(updateEmp);
+      let updateEmployee = updateEmp.map(
+        (employee) => employee.first_name + " " + employee.last_name
+      );
+      let updateEmployeeRole = updateEmp.map((role) => role.title);
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            message: "Select an employee to update their role",
+            choices: updateEmployee,
+            name: "employee",
+          },
+          {
+            type: "list",
+            message: "Choose new role",
+            choices: updateEmployeeRole,
+            name: "role",
+          },
+        ])
+        .then(function (response) {
+          console.log(response);
+          const employeeObj = updateEmp.find(
+            (employee) =>
+              employee.first_name + " " + employee.last_name ===
+              response.employee
+          );
+          const employeeRoleObject = updateEmp.find(
+            (role) => role.title === response.role
+          );
+
+          const query = "UPDATE employee SET ? WHERE ?";
+
+          connection.query(
+            query,
+            [
+              {
+                role_id: employeeRoleObject.roleID,
+              },
+              {
+                id: employeeObj.employeeID,
+              },
+            ],
+
+            (err, res) => {
+              if (err) throw err;
+            }
+          );
+
+          console.log(response.employee + "'s role has been updated.");
+          choices();
+        });
+    });
 }
 
 choices();
