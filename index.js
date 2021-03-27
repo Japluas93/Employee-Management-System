@@ -138,7 +138,6 @@ function addRole() {
         const choice = { name: dept.name, value: dept.id };
         choiceArray.push(choice);
       }
-
       inquirer
         .prompt([
           {
